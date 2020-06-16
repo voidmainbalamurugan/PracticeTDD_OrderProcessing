@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using OrderProcessing;
+using System.Linq;
 
 namespace TestOrderProcessing
 {
@@ -37,10 +38,12 @@ namespace TestOrderProcessing
 
             //act
             var rules = repo.GetRules<Product>();
-
+            
             //assert
             Assert.NotNull(rules);
             Assert.NotEmpty(rules);
+            Assert.True(rules.Count() > 0);
+            
         }
 
         [Fact]
@@ -55,6 +58,7 @@ namespace TestOrderProcessing
             //assert
             Assert.NotNull(rules);
             Assert.NotEmpty(rules);
+            Assert.Contains(rules, t => t is CreatePackingSlip);
         }
 
         [Fact]
@@ -69,6 +73,7 @@ namespace TestOrderProcessing
             //assert
             Assert.NotNull(rules);
             Assert.NotEmpty(rules);
+            Assert.Contains(rules, t => t is GenerateCommission);
         }
     }
 }

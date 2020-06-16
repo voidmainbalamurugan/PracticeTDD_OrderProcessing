@@ -14,7 +14,7 @@ namespace OrderProcessing
         public Status ItemStatus {get; set;}
         public DateTime CreatedOn {get; set;}
         public DateTime UpdatedOn {get; set;}
-
+        public Order CurrentOrder {get; set;}
         public abstract void ProcessOrderItem(IRulesManager rulesManager);
     }
 }

@@ -18,5 +18,14 @@ namespace OrderProcessing
 
         public IList<OrderItem> Items {get; set;}
 
+        public void AddOrderItem(OrderItem item)
+        {
+            Items?.Add(item);
+        }
+
+        public Order()
+        {
+            Items = new List<OrderItem>();
+        }
     }
 }

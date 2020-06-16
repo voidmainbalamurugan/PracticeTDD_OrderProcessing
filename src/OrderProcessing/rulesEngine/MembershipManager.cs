@@ -4,11 +4,14 @@ namespace OrderProcessing
 {
     public class MembershipManager : IMembershipManager
     {
-        public IMembership Membership { get => throw new NotImplementedException(); }
-
+        public IMembership Membership => _membership;
+        IMembership _membership {get; set;}
         public void SetMemership(IMembership membership)
         {
-            throw new NotImplementedException();
+            if(membership == default(IMembership))
+                throw new ArgumentNullException(nameof(membership));
+
+            this._membership = membership;
         }
     }
 }

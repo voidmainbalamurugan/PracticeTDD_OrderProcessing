@@ -6,19 +6,22 @@ namespace OrderProcessing
     {
         public bool IsActive {
 
-            get {
-                return false;
-            }
-
-            set{}
+            get; set;
         }
         public User Owner {get; set;}
         public DateTime ExpiryDate {get; set;}
+        INotification<NewMembership> _notification {get; set;}
+
         public override void ProcessOrderItem(IRulesManager rulesManager)
         {
             // null-check
 
             rulesManager.Process(this);
+        }
+
+        public void NotifyUser()
+        {
+            _notification.SendNotification(this);
         }
 
         public void Assign(IMembershipManager manager)
