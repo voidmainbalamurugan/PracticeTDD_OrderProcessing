@@ -6,7 +6,7 @@ namespace OrderProcessing
 
         public void AddComission(float amount)
         {
-            // add comission
+            CommissionEarned += amount;
         }
     }
 }
