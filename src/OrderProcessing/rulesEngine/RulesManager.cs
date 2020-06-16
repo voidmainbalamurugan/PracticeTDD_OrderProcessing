@@ -4,12 +4,31 @@ namespace OrderProcessing
 {
     public class RulesManager : IRulesManager
     {
-        public IRulesRepo RulesRepo => throw new NotImplementedException();
+        public IRulesRepo RulesRepo => _rulesRepo;
+        IRulesRepo _rulesRepo {get; set;}
+
+        public RulesManager(IRulesRepo repo = null)
+        {
+            _rulesRepo = repo?? new StaticRulesRepo();
+        }
+
+        public RulesManager()
+        {
+            _rulesRepo = new StaticRulesRepo();
+        }
 
         public void Process(Product product)
         {
-            //yet to be implemented.
-            throw new NotImplementedException();
+            if(product == default(Product))
+                throw new ArgumentNullException(nameof(product));
+
+            // get rules for Product 
+            var rules = _rulesRepo.GetRules<Product>();
+
+            // apply them
+            foreach(var rule in rules)
+                rule.Complete(product);
+            
         }
 
         public void Process(NewMembership membership)

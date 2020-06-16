@@ -12,7 +12,7 @@ namespace OrderProcessing
             if(item == default(Product))
                 throw new ArgumentNullException(nameof(item));
 
-            if (!item.PackingSlips.Any())
+            if (item.PackingSlips == default(List<Packingslip>))
                 item.PackingSlips = new List<Packingslip>();
 
             item.PackingSlips.Add(GetPackingslip(item));
