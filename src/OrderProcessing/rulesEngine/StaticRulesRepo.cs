@@ -9,7 +9,7 @@ namespace OrderProcessing
         {
             
 
-            throw new NotImplementedException();
+            return new List<Rule<Titem>>();
         }
 
     }
