@@ -8,7 +8,5 @@ namespace OrderProcessing
         User Owner {get; set;}
 
         DateTime ExpiryDate {get; set;}
-
-        void Assign(IMembershipManager manager);
     }
 }

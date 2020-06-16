@@ -122,6 +122,21 @@ namespace TestOrderProcessing
             Assert.Contains(rules, t => t is MembershipUpgrade);
         }
 
+        [Fact]
+        public void GetRules_should_return_for_videocontent()
+        {
+            //arrange
+            IRulesRepo repo= new StaticRulesRepo();
+
+            //act
+            var rules = repo.GetRules<VideoContent>();
+
+            //assert
+            Assert.NotNull(rules);
+            Assert.NotEmpty(rules);
+            Assert.Contains(rules, t => t is FreeVideoRule);
+        }
+
 
     }
 }

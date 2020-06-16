@@ -34,7 +34,7 @@ namespace OrderProcessing
             }
                 
             return (item.ItemStatus == Status.Accepted || item.ItemStatus == Status.Processing)
-            && !exists; 
+            && !exists && item.IsELearning; 
         }
     }
 }

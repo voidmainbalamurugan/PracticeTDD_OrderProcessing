@@ -33,12 +33,29 @@ namespace OrderProcessing
 
         public void Process(NewMembership membership)
         {
-            throw new NotImplementedException();
+            if(membership == default(NewMembership))
+                throw new ArgumentNullException(nameof(membership));
+
+            // get rules for Product 
+            var rules = _rulesRepo.GetRules<NewMembership>();
+
+            // apply them
+            foreach(var rule in rules)
+                rule.Complete(membership);
+            
         }
 
         public void Process(ActiveMembership membership)
         {
-            throw new NotImplementedException();
+            if(membership == default(ActiveMembership))
+                throw new ArgumentNullException(nameof(membership));
+
+            // get rules for Product 
+            var rules = _rulesRepo.GetRules<ActiveMembership>();
+
+            // apply them
+            foreach(var rule in rules)
+                rule.Complete(membership);
         }
 
         public void Process(Book book)
@@ -57,12 +74,21 @@ namespace OrderProcessing
 
         public void Process(VideoContent video)
         {
-            throw new NotImplementedException();
+            if(video == default(VideoContent))
+                throw new ArgumentNullException(nameof(video));
+
+            // get rules for Product 
+            var rules = _rulesRepo.GetRules<VideoContent>();
+
+            // apply them
+            foreach(var rule in rules)
+                rule.Complete(video);
+            
         }
 
         public void Process(FreeVideoContent video)
         {
-            throw new NotImplementedException();
+            // no rules available
         }
     }
 }

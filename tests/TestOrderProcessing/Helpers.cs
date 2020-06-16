@@ -3,6 +3,8 @@ using Xunit;
 using OrderProcessing;
 using System.Linq;
 using AutoMapper;
+using Moq;
+using System.Linq.Expressions;
 
 namespace TestOrderProcessing
 {
@@ -102,6 +104,66 @@ namespace TestOrderProcessing
             return item;
         }
 
+        public static VideoContent GetVideContent()
+        {
+            var id = new Random().Next(int.MaxValue -5);
+            var order = GetOrder();
+            var item = mapper.Map<VideoContent>(GetItem("VideoContent"));
+            item.CurrentOrder = order;
+            item.IsELearning = true;
+            
+            order.AddOrderItem(item);
+
+            return item;
+        }
+
+        public static NewMembership GetNewMembership(INotification<NewMembership> notify)
+        {
+            var id = new Random().Next(int.MaxValue -5);
+            var order = GetOrder();
+            var mid = new Random().Next(int.MaxValue -5);
+            var name = "NewMembership";
+            var membership = new NewMembership(notify){
+                Id = mid,
+                CreatedOn = DateTime.Now,
+                ItemName = $"{name}-{mid}",
+                ItemPrice = id+1,
+                ItemStatus = Status.Accepted,
+                ItemType = name,
+                Quantity = 1,
+                UnitPrice = id +1,
+                Owner = order.Customer,
+                IsActive = true
+            };
+            
+            order.AddOrderItem(membership);
+
+            return membership;
+        }
+
+        public static ActiveMembership GetActiveMembership(INotification<ActiveMembership> notify)
+        {
+            var id = new Random().Next(int.MaxValue -5);
+            var order = GetOrder();
+            var mid = new Random().Next(int.MaxValue -5);
+            var name = "ActiveMembership";
+            var membership = new ActiveMembership(notify){
+                Id = mid,
+                CreatedOn = DateTime.Now,
+                ItemName = $"{name}-{mid}",
+                ItemPrice = id+1,
+                ItemStatus = Status.Accepted,
+                ItemType = name,
+                Quantity = 1,
+                UnitPrice = id +1,
+                Owner = order.Customer,
+                IsActive = true
+            };
+            
+            order.AddOrderItem(membership);
+
+            return membership;
+        }
 
     }
 }

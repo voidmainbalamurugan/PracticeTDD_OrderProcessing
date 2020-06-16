@@ -12,6 +12,16 @@ namespace OrderProcessing
         public DateTime ExpiryDate {get; set;}
         INotification<NewMembership> _notification {get; set;}
 
+        public NewMembership()
+        {
+            _notification = new NewMemberNotification();
+        }
+
+        public NewMembership(INotification<NewMembership> notification = null)
+        {
+            _notification = notification?? new NewMemberNotification();
+        }
+
         public override void ProcessOrderItem(IRulesManager rulesManager)
         {
             // null-check
@@ -22,13 +32,6 @@ namespace OrderProcessing
         public void NotifyUser()
         {
             _notification.SendNotification(this);
-        }
-
-        public void Assign(IMembershipManager manager)
-        {
-            // null-check
-
-            manager.SetMemership(this);
         }
 
     }
