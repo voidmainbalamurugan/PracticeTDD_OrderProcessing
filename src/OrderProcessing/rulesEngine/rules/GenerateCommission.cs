@@ -2,6 +2,8 @@ using System;
 
 namespace OrderProcessing
 {
+    
+
     public class GenerateCommission : Rule<Product>
     {
         ICommissionManager _commissionManager {get; set;}
@@ -30,6 +32,34 @@ namespace OrderProcessing
         {
             _commissionManager?.Dispose();
             _commissionManager = null;
+        }
+    }
+
+    public class GenerateBookCommission : Rule<Book>
+    {
+        GenerateCommission _generateCommission {get; set;}
+        
+        public GenerateBookCommission(){
+            _generateCommission = new GenerateCommission();
+        }
+        public GenerateBookCommission(ICommissionManager commissionCalc = null)
+        {
+            _generateCommission = new GenerateCommission(commissionCalc);
+        }
+        protected override void Apply(Book item)
+        {
+            _generateCommission.Complete(item);
+        }
+
+        protected override bool PreValidation(Book item)
+        {
+            return item.ItemStatus == Status.Accepted;
+        }
+
+        public override void Dispose()
+        {
+            _generateCommission?.Dispose();
+            _generateCommission = null;
         }
     }
 }

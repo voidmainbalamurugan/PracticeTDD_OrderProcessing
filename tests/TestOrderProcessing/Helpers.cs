@@ -87,7 +87,7 @@ namespace TestOrderProcessing
         }
 
 
-        public static Product GetBook()
+        public static Book GetBook()
         {
             var id = new Random().Next(int.MaxValue -5);
             var order = GetOrder();

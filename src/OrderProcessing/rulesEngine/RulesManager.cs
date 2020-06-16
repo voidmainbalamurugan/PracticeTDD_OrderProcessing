@@ -43,7 +43,16 @@ namespace OrderProcessing
 
         public void Process(Book book)
         {
-            throw new NotImplementedException();
+            if(book == default(Book))
+                throw new ArgumentNullException(nameof(book));
+
+            // get rules for Product 
+            var rules = _rulesRepo.GetRules<Book>();
+
+            // apply them
+            foreach(var rule in rules)
+                rule.Complete(book);
+            
         }
 
         public void Process(VideoContent video)

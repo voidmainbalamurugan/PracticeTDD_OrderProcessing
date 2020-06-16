@@ -17,12 +17,13 @@ namespace OrderProcessing
             if(item == default(Book))
                 throw new ArgumentNullException(nameof(item));
 
-            if (!item.PackingSlips.Any())
+            if (item.PackingSlips == default(List<Packingslip>))
                 item.PackingSlips = new List<Packingslip>();
-
+            
             var slip = _packingslip.GetPackingslip(item);
             slip.IsOriginal = false;
-
+            
+            item.PackingSlips.Add(_packingslip.GetPackingslip(item));
             item.PackingSlips.Add(slip);
 
         }

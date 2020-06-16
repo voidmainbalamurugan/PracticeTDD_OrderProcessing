@@ -4,18 +4,17 @@ namespace OrderProcessing
 {
     public class CommissionManager : ICommissionManager
     {
+        const double _percentage = 0.05;
         public float GetCommission(OrderItem orderItem)
         {
-            if(orderItem == default(Product))
+            if(orderItem == default(OrderItem))
                 throw new ArgumentNullException(nameof(orderItem));
 
-            return (float)(orderItem.ItemPrice * 0.05);
+            return (float)(orderItem.ItemPrice * _percentage);
         }
 
-        public void Dispose()
-        {
-
-        }
+        public void Dispose() {}
+        
     }
 
 }
