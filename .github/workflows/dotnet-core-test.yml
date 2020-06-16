@@ -17,11 +17,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
-    - name: Go to tests dir
-      working-directory: /home/runner/work/TDD_OrderProcessing/TDD_OrderProcessing/tests/TestOrderProcessing
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore /home/runner/work/TDD_OrderProcessing/TDD_OrderProcessing/tests/TestOrderProcessing/TestOrderProcessing.csproj
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build /home/runner/work/TDD_OrderProcessing/TDD_OrderProcessing/tests/TestOrderProcessing/TestOrderProcessing.csproj --configuration Release --no-restore
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test /home/runner/work/TDD_OrderProcessing/TDD_OrderProcessing/tests/TestOrderProcessing/TestOrderProcessing.csproj --no-restore --verbosity normal
