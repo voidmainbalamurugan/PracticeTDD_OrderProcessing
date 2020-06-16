@@ -10,7 +10,6 @@ namespace OrderProcessing
 
         public void Complete(Titem item)
         {
-            // null-check
             if(item == default(Titem))
                 throw new ArgumentNullException(nameof(Titem));
 

@@ -1,3 +1,5 @@
+using System;
+
 namespace OrderProcessing
 {
     public class VideoContent : OrderItem
@@ -6,7 +8,8 @@ namespace OrderProcessing
         
         public override void ProcessOrderItem(IRulesManager rulesManager)
         {
-            // null-check
+            if(rulesManager == default(IRulesManager))
+                throw new ArgumentNullException(nameof(rulesManager));
 
             rulesManager.Process(this);
         }

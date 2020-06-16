@@ -20,6 +20,9 @@ namespace OrderProcessing
 
         public void AddOrderItem(OrderItem item)
         {
+            if(item == default(OrderItem))
+                throw  new ArgumentNullException(nameof(item));
+
             Items?.Add(item);
         }
 

@@ -52,7 +52,7 @@ namespace TestOrderProcessing
             };
         }
 
-        static Order GetOrder()
+        public static Order GetOrder()
         {
             return new Order()
             {
