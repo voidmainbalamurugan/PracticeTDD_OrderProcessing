@@ -18,7 +18,7 @@ jobs:
       with:
         dotnet-version: 3.1.101
     - name: Go to tests dir
-      working-directory: ./tests/TestOrderProcessing
+      run: cd ./tests/TestOrderProcessing
     - name: Install dependencies
       run: dotnet restore
     - name: Build
